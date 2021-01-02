@@ -1,5 +1,19 @@
-import express from 'express';
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server';
+import { buildSchema } from 'type-graphql';
 
-const app = express();
+import './utils/connection';
 
-app.listen(3333);
+async function bootstrap() {
+  const schema = await buildSchema({
+    resolvers: [],
+  });
+}
+
+const server = new ApolloServer({ schema });
+
+server.listen({ port: 4100 }, () => {
+  console.log('Server Start.');
+});
+
+bootstrap();
